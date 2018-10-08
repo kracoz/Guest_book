@@ -1,3 +1,5 @@
+language = en
+
 frame.refresh=refresh
 frame.add=add
 frame.update=update
