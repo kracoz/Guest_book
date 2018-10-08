@@ -7,7 +7,14 @@ import java.util.List;
 
 public class GuestModel extends AbstractTableModel {
     // Список загловков для колонок в таблице
-    private static final String[] headers = {"ID", "Имя", "Фамилия", "Email", "Телефон", "№ комнаты"};
+    private static final String[] headers = {
+            GuiResource.getLabel("model", "id"),
+            GuiResource.getLabel("model", "givenname"),
+            GuiResource.getLabel("model", "surname"),
+            GuiResource.getLabel("model", "email"),
+            GuiResource.getLabel("model", "phone"),
+            GuiResource.getLabel("model", "room")
+    };
 
     public String[] getHeaders() {
         return headers;

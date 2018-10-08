@@ -69,7 +69,7 @@ public class EditGuestDialog extends JDialog implements ActionListener {
     // Размещаем метки и поля ввода на форме
     private void buildFields() {
         // Набор метки и поля для Имени
-        JLabel lblFirstName = new JLabel("Имя:");
+        JLabel lblFirstName = new JLabel(GuiResource.getLabel("dialog", "givenname"));
         // Выравнивание текста с правой стороны
         lblFirstName.setHorizontalAlignment(SwingConstants.RIGHT);
         // Выставляем координаты метки
@@ -84,7 +84,7 @@ public class EditGuestDialog extends JDialog implements ActionListener {
         add(txtFirstName);
 
         // Набор метки и поля для Фамилии
-        JLabel lblLastName = new JLabel("Фамилия:");
+        JLabel lblLastName = new JLabel(GuiResource.getLabel("dialog", "surname"));
         lblLastName.setHorizontalAlignment(SwingConstants.RIGHT);
         lblLastName.setBounds(new Rectangle(PAD, 1 * H_B + PAD, W_L, H_B));
         add(lblLastName);
@@ -93,7 +93,7 @@ public class EditGuestDialog extends JDialog implements ActionListener {
         add(txtLastName);
 
         // Набор метки и поля для Телефона
-        JLabel lblPhone = new JLabel("Телефон:");
+        JLabel lblPhone = new JLabel(GuiResource.getLabel("dialog", "phone"));
         lblPhone.setHorizontalAlignment(SwingConstants.RIGHT);
         lblPhone.setBounds(new Rectangle(PAD, 2 * H_B + PAD, W_L, H_B));
         add(lblPhone);
@@ -102,7 +102,7 @@ public class EditGuestDialog extends JDialog implements ActionListener {
         add(txtPhone);
 
         // Набор метки и поля для Email
-        JLabel lblEmail = new JLabel("Email:");
+        JLabel lblEmail = new JLabel(GuiResource.getLabel("dialog", "email"));
         lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
         lblEmail.setBounds(new Rectangle(PAD, 3 * H_B + PAD, W_L, H_B));
         add(lblEmail);
@@ -111,7 +111,7 @@ public class EditGuestDialog extends JDialog implements ActionListener {
         add(txtEmail);
 
         // Набор метки и поля для roomNumber
-        JLabel lblroomNumber = new JLabel("Комната:");
+        JLabel lblroomNumber = new JLabel(GuiResource.getLabel("dialog", "room"));
         lblroomNumber.setHorizontalAlignment(SwingConstants.RIGHT);
         lblroomNumber.setBounds(new Rectangle(PAD, 4 * H_B + PAD, W_L, H_B));
         add(lblroomNumber);

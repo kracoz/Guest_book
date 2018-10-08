@@ -3,21 +3,13 @@ package guest.gui;
 
 import guest.business.GuestManager;
 import guest.entity.Guest;
+import guest.exception.GuestBusinessException;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 
 public class GuestFrame extends JFrame implements ActionListener {
     private static final String LOAD = "LOAD";
@@ -49,10 +41,10 @@ public class GuestFrame extends JFrame implements ActionListener {
         // усанавливаем у него layout
         btnPanel.setLayout(gridbag);
         // Создаем кнопки
-        btnPanel.add(createButton(gridbag, gbc, "Обновить", LOAD));
-        btnPanel.add(createButton(gridbag, gbc, "Добавить", ADD));
-        btnPanel.add(createButton(gridbag, gbc, "Исправить", EDIT));
-        btnPanel.add(createButton(gridbag, gbc, "Удалить", DELETE));
+        btnPanel.add(createButton(gridbag, gbc, GuiResource.getLabel("frame", "update"), LOAD));
+        btnPanel.add(createButton(gridbag, gbc, GuiResource.getLabel("frame", "add"), ADD));
+        btnPanel.add(createButton(gridbag, gbc, GuiResource.getLabel("frame", "refresh"), EDIT));
+        btnPanel.add(createButton(gridbag, gbc, GuiResource.getLabel("frame", "delete"), DELETE));
 
         // Создаем панель для левой колокни с кнопками
         JPanel left = new JPanel();
@@ -73,7 +65,11 @@ public class GuestFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Загружаем гостей
-        loadGuest();
+        try {
+            loadGuest();
+        } catch (GuestBusinessException ex) {
+            ex.printStackTrace();
+        }
     }
 
     // Метод создает кнопку с заданными харктеристиками - заголовок и действие
@@ -96,28 +92,32 @@ public class GuestFrame extends JFrame implements ActionListener {
         // Получаем команду - ActionCommand
         String action = ae.getActionCommand();
         // В зависимости от команды выполняем действия
-        switch (action) {
-            // Перегрузка данных
-            case LOAD:
-                loadGuest();
-                break;
-            // Добавление записи
-            case ADD:
-                addGuest();
-                break;
-            // Исправление записи
-            case EDIT:
-                editGuest();
-                break;
-            // Удаление записи
-            case DELETE:
-                deleteGuest();
-                break;
+        try {
+            switch (action) {
+                // Перегрузка данных
+                case LOAD:
+                    loadGuest();
+                    break;
+                // Добавление записи
+                case ADD:
+                    addGuest();
+                    break;
+                // Исправление записи
+                case EDIT:
+                    editGuest();
+                    break;
+                // Удаление записи
+                case DELETE:
+                    deleteGuest();
+                    break;
+            }
+        } catch (GuestBusinessException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
 
     // Загрузить список гостей
-    private void loadGuest() {
+    private void loadGuest() throws GuestBusinessException {
         // Обращаемся к классу для загрузки списка гостей
         List<Guest> guests = guestManager.findGuests();
         // Создаем модель, которой передаем полученный список
@@ -127,7 +127,7 @@ public class GuestFrame extends JFrame implements ActionListener {
     }
 
     // Добавление гостя
-    private void addGuest() {
+    private void addGuest() throws GuestBusinessException {
         // Создаем диалог для ввода данных
         EditGuestDialog ecd = new EditGuestDialog();
         // Обрабатываем закрытие диалога
@@ -135,7 +135,7 @@ public class GuestFrame extends JFrame implements ActionListener {
     }
 
     // Редактирование гостя
-    private void editGuest() {
+    private void editGuest() throws GuestBusinessException {
         // Получаем выделеннуб строку
         int sr = guestTable.getSelectedRow();
         // если строка выделена - можно ее редактировать
@@ -155,7 +155,7 @@ public class GuestFrame extends JFrame implements ActionListener {
     }
 
     // Удаление гостя
-    private void deleteGuest() {
+    private void deleteGuest() throws GuestBusinessException {
         // Получаем выделеннуб строку
         int sr = guestTable.getSelectedRow();
         if (sr != -1) {
@@ -171,7 +171,7 @@ public class GuestFrame extends JFrame implements ActionListener {
     }
 
     // Общий метод для добавления и изменения гостя
-    private void saveGuest(EditGuestDialog ecd) {
+    private void saveGuest(EditGuestDialog ecd) throws GuestBusinessException {
         // Если мы нажали кнопку SAVE
         if (ecd.isSave()) {
             // Получаем гостя из диалогового окна
