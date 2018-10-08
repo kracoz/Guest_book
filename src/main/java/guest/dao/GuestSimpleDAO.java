@@ -33,6 +33,7 @@ public class GuestSimpleDAO implements GuestDAO {
             oldContact.setLastName(guest.getLastName());
             oldContact.setPhone(guest.getPhone());
             oldContact.setEmail(guest.getEmail());
+            oldContact.setRoomNumber(guest.getRoomNumber());
         }
     }
 
