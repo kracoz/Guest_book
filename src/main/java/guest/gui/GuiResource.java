@@ -9,7 +9,7 @@ import java.util.PropertyResourceBundle;
  * Created by user on 08.10.2018.
  */
 public class GuiResource {
-    private static final String RESOURCES = "guest.gui.ContactResources";
+    private static final String RESOURCES = "GuestResources";
     private static final String LANGUAGE = "language";
 
     private static PropertyResourceBundle components = null;
