@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class GuestDbDAO implements GuestDAO {
     private static final String SELECT
-            = "SELECT guest_id, first_name, last_name, phone, email FROM jc_guest ORDER BY first_name, last_name";
+            = "SELECT guest_id, first_name, last_name, phone, email, room FROM jc_guest ORDER BY first_name, last_name";
     private static final String SELECT_ONE
-            = "SELECT guest_id, first_name, last_name, phone, email FROM jc_guest WHERE guest_id=?";
+            = "SELECT guest_id, first_name, last_name, phone, email, room FROM jc_guest WHERE guest_id=?";
     private static final String INSERT
             = "INSERT INTO jc_guest (first_name, last_name, phone, email, room) VALUES (?, ?, ?, ?, ?)";
     private static final String UPDATE
@@ -25,8 +25,7 @@ public class GuestDbDAO implements GuestDAO {
     private static final String DELETE
             = "DELETE FROM jc_guest WHERE guest_id=?";
 
-    private ConnectionBuilder builder = new SimpleConnectionBuilder();
-
+    private ConnectionBuilder builder = ConnectionBuilderFactory.getConnectionBuilder();
     private Connection getConnection() throws SQLException {
         return builder.getConnection();
     }
@@ -40,7 +39,7 @@ public class GuestDbDAO implements GuestDAO {
             pst.setString(2, guest.getLastName());
             pst.setString(3, guest.getPhone());
             pst.setString(4, guest.getEmail());
-            pst.setString(5, guest.getRoomNumber());
+            pst.setLong(5, guest.getRoomNumber());
             pst.executeUpdate();
             ResultSet res = pst.getGeneratedKeys();
             if (res.next()) {
@@ -61,7 +60,7 @@ public class GuestDbDAO implements GuestDAO {
             pst.setString(2, guest.getLastName());
             pst.setString(3, guest.getPhone());
             pst.setString(4, guest.getEmail());
-            pst.setString(5, guest.getRoomNumber());
+            pst.setLong(5, guest.getRoomNumber());
             pst.setLong(6, guest.getGuestId());
             pst.executeUpdate();
         } catch (Exception e) {
@@ -107,7 +106,6 @@ public class GuestDbDAO implements GuestDAO {
             while (rs.next()) {
                 list.add(fillGuest(rs));
             }
-            rs.close();
         } catch (Exception e) {
             throw new GuestDaoException(e);
         }
@@ -121,6 +119,7 @@ public class GuestDbDAO implements GuestDAO {
         guest.setLastName(rs.getString("last_name"));
         guest.setPhone(rs.getString("phone"));
         guest.setEmail(rs.getString("email"));
+        guest.setRoomNumber((long)rs.getInt("room"));
         return guest;
     }
 }

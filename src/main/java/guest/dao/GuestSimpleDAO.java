@@ -12,9 +12,9 @@ public class GuestSimpleDAO implements GuestDAO {
 
 
     public GuestSimpleDAO() {
-        addGuest(new Guest("Андрей", "Соколов", "+7-911-890-7766", "sokolov@yandex.ru", "101"));
-        addGuest(new Guest("Сергей", "Иванов", "+7-911-890-7755", "ivanov@google.com", "102"));
-        addGuest(new Guest("Татьяна", "Семенова", "+7-911-890-1164", "semenova@mail.ru", "103"));
+        addGuest(new Guest("Андрей", "Соколов", "+7-911-890-7766", "sokolov@yandex.ru", 101L));
+        addGuest(new Guest("Сергей", "Иванов", "+7-911-890-7755", "ivanov@google.com", 102L));
+        addGuest(new Guest("Татьяна", "Семенова", "+7-911-890-1164", "semenova@mail.ru", 103L));
     }
 
     @Override

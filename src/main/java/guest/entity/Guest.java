@@ -17,7 +17,7 @@ public class Guest {
             // email
             private String email;
             //номер комнаты
-            private String roomNumber;
+            private Long roomNumber;
 
     public Long getGuestId() {
         return guestId;
@@ -59,18 +59,18 @@ public class Guest {
         this.email = email;
     }
 
-    public String getRoomNumber() {
+    public Long getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(String roomNumber) {
+    public void setRoomNumber(Long roomNumber) {
         this.roomNumber = roomNumber;
     }
 
     public Guest() {
     }
 
-    public Guest(String firstName, String lastName, String phone, String email, String roomNumber) {
+    public Guest(String firstName, String lastName, String phone, String email, Long roomNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -78,7 +78,7 @@ public class Guest {
         this.roomNumber = roomNumber;
     }
 
-    public Guest(Long guestId, String firstName, String lastName, String phone, String email, String roomNumber) {
+    public Guest(Long guestId, String firstName, String lastName, String phone, String email, Long roomNumber) {
         this.guestId = guestId;
         this.firstName = firstName;
         this.lastName = lastName;

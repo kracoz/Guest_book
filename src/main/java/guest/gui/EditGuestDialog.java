@@ -128,7 +128,7 @@ public class EditGuestDialog extends JDialog implements ActionListener {
             txtLastName.setText(guest.getLastName());
             txtEmail.setText(guest.getEmail());
             txtPhone.setText(guest.getPhone());
-            roomNumber.setText(guest.getRoomNumber());
+            roomNumber.setText(String.valueOf(guest.getRoomNumber()));
         }
     }
 
@@ -165,7 +165,7 @@ public class EditGuestDialog extends JDialog implements ActionListener {
     // Создаем гостя из заполенных полей, который можно будет записать
     public Guest getGuest() {
         Guest guest = new Guest(guestId, txtFirstName.getText(),
-                txtLastName.getText(), txtPhone.getText(), txtEmail.getText(), roomNumber.getText());
+                txtLastName.getText(), txtPhone.getText(), txtEmail.getText(), Long.parseLong(roomNumber.getText()));
         return guest;
     }
 }
