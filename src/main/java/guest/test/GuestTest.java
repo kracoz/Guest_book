@@ -1,3 +1,5 @@
+package guest.test;
+
 import guest.config.GlobalConfig;
 import guest.gui.GuestFrame;
 import guest.gui.GuiResource;
